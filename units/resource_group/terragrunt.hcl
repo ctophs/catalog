@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../modules/resource_group"
+  source = "git::file:///home/user/terragrunt/catalog//modules/resource_group?ref=master"
 }
 
 inputs = {

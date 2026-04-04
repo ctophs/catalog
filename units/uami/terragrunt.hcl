@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../modules/uami"
+  source = "git::file:///home/user/terragrunt/catalog//modules/uami?ref=master"
 }
 
 inputs = {

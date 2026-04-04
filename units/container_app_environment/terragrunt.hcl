@@ -3,7 +3,7 @@ include "root" {
 }
 
 terraform {
-  source = "../../modules/container_app_environment"
+  source = "git::file:///home/user/terragrunt/catalog//modules/container_app_environment?ref=master"
 }
 
 
