@@ -1,5 +1,10 @@
+locals {
+  catalog_url = "git::file:///home/user/terragrunt/catalog"
+  catalog_ref = "master"
+}
+
 unit "uami" {
-  source = "../../units/uami"
+  source = "${local.catalog_url}//units/uami?ref=${local.catalog_ref}"
   path   = "uami"
   values = {
     name                = "${values.name}-uami"
@@ -9,7 +14,7 @@ unit "uami" {
 }
 
 unit "container-app" {
-  source = "../../units/container_app"
+  source = "${local.catalog_url}//units/container_app?ref=${local.catalog_ref}"
   path   = "container-app"
   values = {
     name          = values.name
