@@ -2,15 +2,17 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-terraform {
-  source = "git::file:///home/user/terragrunt/catalog//modules/container_app?ref=master"
-}
-
 locals {
+  catalog = read_terragrunt_config(find_in_parent_folders("catalog.hcl"))
+
   # When nested stacks generate this unit, its path is:
   # <stack>/.terragrunt-stack/<env>/.terragrunt-stack/container-app/
   # dirname twice gives <stack>/.terragrunt-stack/<env>/, basename of that is the env name.
   env = basename(dirname(dirname(get_terragrunt_dir())))
+}
+
+terraform {
+  source = "${local.catalog.locals.url}//modules/container_app?ref=${local.catalog.locals.ref}"
 }
 
 dependency "uami" {

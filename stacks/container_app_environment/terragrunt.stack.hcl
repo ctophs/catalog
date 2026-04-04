@@ -1,10 +1,9 @@
 locals {
-  catalog_url = "git::file:///home/user/terragrunt/catalog"
-  catalog_ref = "master"
+  catalog = read_terragrunt_config(find_in_parent_folders("catalog.hcl"))
 }
 
 unit "cae-resource-group" {
-  source = "${local.catalog_url}//units/resource_group?ref=${local.catalog_ref}"
+  source = "${local.catalog.locals.url}//units/resource_group?ref=${local.catalog.locals.ref}"
   path   = "cae-resource-group"
   values = {
     name     = values.resource_group_name
@@ -13,7 +12,7 @@ unit "cae-resource-group" {
 }
 
 unit "cae" {
-  source = "${local.catalog_url}//units/container_app_environment?ref=${local.catalog_ref}"
+  source = "${local.catalog.locals.url}//units/container_app_environment?ref=${local.catalog.locals.ref}"
   path   = "cae"
   values = {
     name                     = values.name
@@ -23,7 +22,7 @@ unit "cae" {
 }
 
 unit "uami-resource-group" {
-  source = "${local.catalog_url}//units/resource_group?ref=${local.catalog_ref}"
+  source = "${local.catalog.locals.url}//units/resource_group?ref=${local.catalog.locals.ref}"
   path   = "uami-resource-group"
   values = {
     name     = values.uami_resource_group_name
@@ -32,7 +31,7 @@ unit "uami-resource-group" {
 }
 
 unit "uami" {
-  source = "${local.catalog_url}//units/uami?ref=${local.catalog_ref}"
+  source = "${local.catalog.locals.url}//units/uami?ref=${local.catalog.locals.ref}"
   path   = "uami"
   values = {
     name                = values.name

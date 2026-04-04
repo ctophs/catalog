@@ -2,10 +2,13 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-terraform {
-  source = "git::file:///home/user/terragrunt/catalog//modules/container_app_environment?ref=master"
+locals {
+  catalog = read_terragrunt_config(find_in_parent_folders("catalog.hcl"))
 }
 
+terraform {
+  source = "${local.catalog.locals.url}//modules/container_app_environment?ref=${local.catalog.locals.ref}"
+}
 
 dependency "resource_group" {
   config_path = "../cae-resource-group"

@@ -1,10 +1,9 @@
 locals {
-  catalog_url = "git::file:///home/user/terragrunt/catalog"
-  catalog_ref = "master"
+  catalog = read_terragrunt_config(find_in_parent_folders("catalog.hcl"))
 }
 
 unit "uami" {
-  source = "${local.catalog_url}//units/uami?ref=${local.catalog_ref}"
+  source = "${local.catalog.locals.url}//units/uami?ref=${local.catalog.locals.ref}"
   path   = "uami"
   values = {
     name                = "${values.name}-uami"
@@ -14,7 +13,7 @@ unit "uami" {
 }
 
 unit "container-app" {
-  source = "${local.catalog_url}//units/container_app?ref=${local.catalog_ref}"
+  source = "${local.catalog.locals.url}//units/container_app?ref=${local.catalog.locals.ref}"
   path   = "container-app"
   values = {
     name          = values.name

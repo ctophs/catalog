@@ -2,8 +2,12 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
+locals {
+  catalog = read_terragrunt_config(find_in_parent_folders("catalog.hcl"))
+}
+
 terraform {
-  source = "git::file:///home/user/terragrunt/catalog//modules/uami?ref=master"
+  source = "${local.catalog.locals.url}//modules/uami?ref=${local.catalog.locals.ref}"
 }
 
 inputs = {
