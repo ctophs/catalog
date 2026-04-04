@@ -1,3 +1,5 @@
+# Terragrunt-Stacks unterstuetzen kein include — daher muss catalog.hcl
+# hier direkt gelesen werden, statt ueber root.hcl wie bei Units.
 locals {
   catalog = read_terragrunt_config(find_in_parent_folders("catalog.hcl"))
 }
