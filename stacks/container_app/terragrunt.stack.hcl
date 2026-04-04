@@ -16,6 +16,7 @@ unit "container-app" {
   source = "${local.catalog.locals.url}//units/container_app?ref=${local.catalog.locals.ref}"
   path   = "container-app"
   values = {
+    module        = "container_app"
     name          = values.name
     revision_mode = try(values.revision_mode, "Single")
     template      = values.template
