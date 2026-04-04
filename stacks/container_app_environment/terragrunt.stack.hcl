@@ -6,7 +6,6 @@ unit "cae-resource-group" {
   source = "${local.catalog.locals.url}//units/resource_group?ref=${local.catalog.locals.ref}"
   path   = "cae-resource-group"
   values = {
-    module   = "resource_group"
     name     = values.resource_group_name
     location = values.location
   }
@@ -16,7 +15,6 @@ unit "cae" {
   source = "${local.catalog.locals.url}//units/container_app_environment?ref=${local.catalog.locals.ref}"
   path   = "cae"
   values = {
-    module                   = "container_app_environment"
     name                     = values.name
     location                 = values.location
     infrastructure_subnet_id = try(values.infrastructure_subnet_id, null)
@@ -27,7 +25,6 @@ unit "uami-resource-group" {
   source = "${local.catalog.locals.url}//units/resource_group?ref=${local.catalog.locals.ref}"
   path   = "uami-resource-group"
   values = {
-    module   = "resource_group"
     name     = values.uami_resource_group_name
     location = values.location
   }

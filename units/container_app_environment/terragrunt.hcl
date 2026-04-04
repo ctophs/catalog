@@ -1,5 +1,10 @@
 include "root" {
-  path = find_in_parent_folders("root.hcl")
+  path   = find_in_parent_folders("root.hcl")
+  expose = true
+}
+
+terraform {
+  source = "${include.root.locals.catalog_url}//modules/container_app_environment?ref=${include.root.locals.catalog_ref}"
 }
 
 dependency "resource_group" {
