@@ -57,4 +57,12 @@ resource "azurerm_container_app" "this" {
       identity_ids = [identity.value]
     }
   }
+
+  dynamic "registry" {
+    for_each = var.uami_id != null && var.registry_server != null ? [1] : []
+    content {
+      server   = var.registry_server
+      identity = var.uami_id
+    }
+  }
 }

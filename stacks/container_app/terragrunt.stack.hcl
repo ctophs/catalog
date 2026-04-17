@@ -18,11 +18,11 @@ unit "container-app" {
   source = "${local.catalog.locals.url}//units/container_app?ref=${local.catalog.locals.ref}"
   path   = "container-app"
   values = {
-    name          = values.name
-    revision_mode = try(values.revision_mode, "Single")
-    template      = values.template
-    ingress       = try(values.ingress, null)
-    tags          = try(values.tags, {})
-    secrets       = try(values.secrets, [])
+    name            = values.name
+    revision_mode   = try(values.revision_mode, "Single")
+    template        = values.template
+    ingress         = try(values.ingress, null)
+    registry_server = try(values.registry_server, null)
+    secrets         = try(values.secrets, [])
   }
 }

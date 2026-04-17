@@ -54,6 +54,12 @@ variable "uami_id" {
   default     = null
 }
 
+variable "registry_server" {
+  type        = string
+  description = "Private registry server URL. When set together with uami_id, the Container App authenticates to this registry via the managed identity. Leave null for public images."
+  default     = null
+}
+
 variable "secrets" {
   type = list(object({
     name  = string

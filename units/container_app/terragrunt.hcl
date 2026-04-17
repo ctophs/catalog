@@ -51,5 +51,6 @@ inputs = {
   template                     = values.template
   ingress                      = try(values.ingress, null)
   uami_id                      = dependency.uami.outputs.id
+  registry_server              = try(values.registry_server, null)
   secrets                      = try(values.secrets, [])
 }
