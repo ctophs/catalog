@@ -21,3 +21,17 @@ run "plan_without_workload_profiles" {
     workload_profiles   = []
   }
 }
+
+run "precondition_fails_when_profiles_without_subnet" {
+  command = plan
+
+  variables {
+    name                = "cae-test"
+    location            = "westeurope"
+    resource_group_name = "rg-test"
+  }
+
+  expect_failures = [
+    azurerm_container_app_environment.this,
+  ]
+}
