@@ -19,7 +19,7 @@ terraform test
 ### Beispiel
 
 ```bash
-cd modules/resource-group
+cd modules/resource_group
 terraform init
 terraform test
 ```
@@ -36,7 +36,7 @@ Success! 1 passed, 0 failed.
 ## Alle Module auf einmal testen
 
 ```bash
-for mod in resource-group container-app-environment uami container-app; do
+for mod in resource_group container_app_environment uami container_app; do
   echo "=== $mod ==="
   cd modules/$mod && terraform init -upgrade 2>&1 | tail -1 && terraform test
   cd -
