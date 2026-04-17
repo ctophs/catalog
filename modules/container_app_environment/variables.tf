@@ -19,6 +19,12 @@ variable "infrastructure_subnet_id" {
   default     = null
 }
 
+# Default enables workload-profiles mode with a single Consumption profile.
+# This mode requires an infrastructure subnet (siehe precondition in main.tf),
+# erlaubt aber, später dedizierte Profile (D/E-series) ohne Neuanlage der CAE
+# hinzuzufügen — der Wechsel von Consumption-only zu workload-profiles wäre
+# sonst ein Breaking Change. Setze [] nur, wenn bewusst auf Consumption-only
+# verzichtet werden soll (dann wird auch kein subnet benötigt).
 variable "workload_profiles" {
   type = list(object({
     name                  = string
