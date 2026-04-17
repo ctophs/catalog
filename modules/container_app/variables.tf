@@ -54,24 +54,6 @@ variable "uami_id" {
   default     = null
 }
 
-variable "shared_container_registry" {
-  type        = string
-  description = "Server URL of the shared container registry."
-  default     = "pwsshared.azurecr.io"
-}
-
-variable "registry_username" {
-  type        = string
-  description = "Username for registry authentication. Used when uami_id is not set."
-  default     = null
-}
-
-variable "registry_password_secret_name" {
-  type        = string
-  description = "Name of the secret containing the registry password. Used when uami_id is not set."
-  default     = null
-}
-
 variable "secrets" {
   type = list(object({
     name  = string
@@ -79,10 +61,4 @@ variable "secrets" {
   }))
   description = "Secrets to configure on the Container App."
   default     = []
-}
-
-variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to the resource."
-  default     = {}
 }

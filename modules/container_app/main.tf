@@ -3,7 +3,6 @@ resource "azurerm_container_app" "this" {
   resource_group_name          = var.resource_group_name
   container_app_environment_id = var.container_app_environment_id
   revision_mode                = var.revision_mode
-  tags                         = var.tags
 
   dynamic "secret" {
     for_each = var.secrets
@@ -56,21 +55,6 @@ resource "azurerm_container_app" "this" {
     content {
       type         = "UserAssigned"
       identity_ids = [identity.value]
-    }
-  }
-
-  # Registry-Authentifizierung: zwei sich gegenseitig ausschließende Optionen.
-  # Option 1 (bevorzugt): uami_id setzen — verwendet Managed Identity,
-  #   keine Zugangsdaten erforderlich.
-  # Option 2: registry_username + registry_password_secret_name setzen
-  #   — verwendet Benutzername/Passwort-Authentifizierung.
-  dynamic "registry" {
-    for_each = var.uami_id != null || var.registry_username != null ? [1] : []
-    content {
-      server               = var.shared_container_registry
-      identity             = var.uami_id
-      username             = var.registry_username
-      password_secret_name = var.registry_password_secret_name
     }
   }
 }
